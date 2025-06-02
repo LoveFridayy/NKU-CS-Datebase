@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>侧边栏</title>
+</head>
+<body>
+ <!-- 侧边栏 -->
+    <aside class="w-64 bg-white shadow-lg h-screen fixed left-0 top-0 z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300"
+           id="sidebar">
+        <div class="flex items-center justify-between p-4 border-b">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-hotel text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-neutral-dark">酒店管理系统</h1>
+            </div>
+            <button id="close-sidebar" class="md:hidden text-neutral-dark hover:text-primary">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="p-4">
+            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3 pl-2">主导航</p>
+            <ul class="space-y-1">
+                <li>
+                    <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                        <i class="fa-solid fa-chart-pie w-5 text-center"></i>
+                        <span>仪表盘</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#rooms" class="nav-item" data-page="rooms">
+                        <i class="fa-solid fa-bed w-5 text-center"></i>
+                        <span>房间管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#guests" class="nav-item" data-page="guests">
+                        <i class="fa-solid fa-users w-5 text-center"></i>
+                        <span>客户管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#reservations" class="nav-item" data-page="reservations">
+                        <i class="fa-solid fa-calendar-check w-5 text-center"></i>
+                        <span>预订管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#services" class="nav-item" data-page="services">
+                        <i class="fa-solid fa-concierge-bell w-5 text-center"></i>
+                        <span>服务管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#reports" class="nav-item" data-page="reports">
+                        <i class="fa-solid fa-file-text w-5 text-center"></i>
+                        <span>报表中心</span>
+                    </a>
+                </li>
+            </ul>
+
+            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3 mt-8 pl-2">系统</p>
+            <ul class="space-y-1">
+                <li>
+                    <a href="#settings" class="nav-item" data-page="settings">
+                        <i class="fa-solid fa-cog w-5 text-center"></i>
+                        <span>系统设置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#help" class="nav-item" data-page="help">
+                        <i class="fa-solid fa-question-circle w-5 text-center"></i>
+                        <span>帮助中心</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+            <div class="flex items-center gap-3">
+                <img src="https://picsum.photos/id/1005/200/200" alt="管理员头像"
+                     class="w-10 h-10 rounded-full object-cover">
+                <div>
+                    <p class="text-sm font-medium text-neutral-dark" id="full-name">管理员</p>
+                    <p class="text-xs text-gray-500" id="email">admin@hotel.com</p>
+                </div>
+                <button class="ml-auto text-gray-500 hover:text-red-500" id="log-out-btn">
+                    <i class="fa-solid fa-sign-out"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+</body>
+</html>

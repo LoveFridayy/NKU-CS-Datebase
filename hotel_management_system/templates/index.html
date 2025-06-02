@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>酒店信息管理系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        neutral: '#F5F7FA',
+                        'neutral-dark': '#1D2129',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+
+            .card-shadow {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+
+            .btn-hover {
+                transition: all 0.3s ease;
+            }
+
+            .btn-hover:hover {
+                transform: translateY(-2px);
+            }
+
+            .nav-item {
+                @apply flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-300;
+            }
+
+            .nav-item:hover {
+                @apply bg-primary/10 text-primary;
+            }
+
+            .nav-item.active {
+                @apply bg-primary/10 text-primary font-medium;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-neutral min-h-screen flex flex-col">
+<!-- 页面加载动画 -->
+<div id="loader" class="fixed inset-0 bg-white z-50 flex items-center justify-center transition-opacity duration-500">
+    <div class="flex flex-col items-center">
+        <div class="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+        <p class="mt-4 text-primary font-medium">加载中...</p>
+    </div>
+</div>
+
+<div class="flex flex-1 overflow-hidden opacity-0 transition-opacity duration-500" id="app-content">
+
+    {% include 'aside.html' %} <!-- 引用侧边栏模板 -->
+
+    <!-- 主内容区 -->
+    <div class="flex-1 md:ml-64 flex flex-col">
+        {% include 'header.html' %} <!-- 引用顶部导航模板 -->
+
+        <!-- 页面内容 -->
+        <main class="flex-1 overflow-y-auto p-6">
+            <!-- 仪表盘页面 -->
+            {% include 'dashboard.html' %} <!-- 引用仪表盘模板 -->
+            <!-- 房间管理页面 -->
+            {% include 'room.html' %} <!-- 引用房间管理模板 -->
+            <!-- 客户管理页面 -->
+            {% include 'guest.html' %} <!-- 引用客户管理模板 -->
+            <!-- 预订管理界面 -->
+            {% include 'reservation.html' %}<!-- 引用预订管理模板 -->
+            <!-- 服务管理页面 -->
+            {% include 'service.html' %} <!-- 引用服务管理模板 -->
+            <!-- 报表中心页面 -->
+            {% include 'report.html' %} <!-- 引用报表中心模板 -->
+            <!-- 系统设置页面 -->
+            {% include 'setting.html' %} <!-- 引用系统设置模板 -->
+            <!-- 帮助中心页面 -->
+            {% include 'help.html' %} <!-- 引用帮助中心模板 -->
+
+        </main>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script src="/static/js/index.js"></script>
+</body>
+</html>

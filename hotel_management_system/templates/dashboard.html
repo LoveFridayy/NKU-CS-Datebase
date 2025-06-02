@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>仪表盘</title>
+</head>
+<body>
+<div id="page-dashboard" class="page-content">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+        <div>
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-dark">仪表盘</h2>
+            <p class="text-gray-500">欢迎回来，今天是 <span id="current-date" class="font-medium"></span></p>
+        </div>
+        <div class="mt-4 md:mt-0 flex gap-3">
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-neutral-dark hover:bg-gray-50 transition-colors">
+                <i class="fa-solid fa-download mr-2"></i>导出报表
+            </button>
+        </div>
+    </div>
+
+    <!-- 统计卡片 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-xl p-6 card-shadow hover:shadow-lg transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p class="text-gray-500 text-sm">今日入住</p>
+                    <h3 class="text-2xl font-bold text-neutral-dark mt-1">24</h3>
+                </div>
+                <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                    <i class="fa-solid fa-user-check text-xl"></i>
+                </div>
+            </div>
+            <div class="flex items-center text-sm">
+                                <span class="text-green-500 flex items-center">
+                                    <i class="fa-solid fa-arrow-up mr-1"></i>12%
+                                </span>
+                <span class="text-gray-500 ml-2">相比昨日</span>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 card-shadow hover:shadow-lg transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p class="text-gray-500 text-sm">今日退房</p>
+                    <h3 class="text-2xl font-bold text-neutral-dark mt-1">18</h3>
+                </div>
+                <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+                    <i class="fa-solid fa-user-xmark text-xl"></i>
+                </div>
+            </div>
+            <div class="flex items-center text-sm">
+                                <span class="text-red-500 flex items-center">
+                                    <i class="fa-solid fa-arrow-down mr-1"></i>8%
+                                </span>
+                <span class="text-gray-500 ml-2">相比昨日</span>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 card-shadow hover:shadow-lg transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p class="text-gray-500 text-sm">空房数量</p>
+                    <h3 class="text-2xl font-bold text-neutral-dark mt-1">32</h3>
+                </div>
+                <div class="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center text-green-500">
+                    <i class="fa-solid fa-bed text-xl"></i>
+                </div>
+            </div>
+            <div class="flex items-center text-sm">
+                                <span class="text-green-500 flex items-center">
+                                    <i class="fa-solid fa-arrow-up mr-1"></i>5%
+                                </span>
+                <span class="text-gray-500 ml-2">相比昨日</span>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 card-shadow hover:shadow-lg transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p class="text-gray-500 text-sm">今日收入</p>
+                    <h3 class="text-2xl font-bold text-neutral-dark mt-1">¥16,800</h3>
+                </div>
+                <div class="w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-500">
+                    <i class="fa-solid fa-money-bill text-xl"></i>
+                </div>
+            </div>
+            <div class="flex items-center text-sm">
+                                <span class="text-green-500 flex items-center">
+                                    <i class="fa-solid fa-arrow-up mr-1"></i>15%
+                                </span>
+                <span class="text-gray-500 ml-2">相比昨日</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图表和表格 -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 card-shadow lg:col-span-2">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="font-bold text-neutral-dark">入住趋势</h3>
+                <div class="flex gap-2">
+                    <button class="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary">本周</button>
+                    <button class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-500 hover:bg-primary/10 hover:text-primary transition-colors">
+                        本月
+                    </button>
+                    <button class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-500 hover:bg-primary/10 hover:text-primary transition-colors">
+                        全年
+                    </button>
+                </div>
+            </div>
+            <div class="h-80">
+                <canvas id="occupancyChart"></canvas>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 card-shadow">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="font-bold text-neutral-dark">房间类型分布</h3>
+                <button class="text-gray-400 hover:text-primary">
+                    <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+            </div>
+            <div class="h-80">
+                <canvas id="roomTypeChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- 最近入住和即将入住 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <div class="bg-white rounded-xl p-6 card-shadow">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="font-bold text-neutral-dark">最近入住</h3>
+                <a href="#guests" class="text-sm text-primary hover:underline">查看全部</a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                    <tr class="text-left text-gray-500 text-sm border-b">
+                        <th class="pb-3 font-medium">客人姓名</th>
+                        <th class="pb-3 font-medium">房间号</th>
+                        <th class="pb-3 font-medium">入住日期</th>
+                        <th class="pb-3 font-medium">状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                        <td class="py-3">张三</td>
+                        <td class="py-3">101</td>
+                        <td class="py-3">2025-05-16</td>
+                        <td class="py-3"><span
+                                class="px-2 py-1 bg-green-100 text-green-600 text-xs rounded-full">已入住</span>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                        <td class="py-3">李四</td>
+                        <td class="py-3">205</td>
+                        <td class="py-3">2025-05-16</td>
+                        <td class="py-3"><span
+                                class="px-2 py-1 bg-green-100 text-green-600 text-xs rounded-full">已入住</span>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                        <td class="py-3">王五</td>
+                        <td class="py-3">302</td>
+                        <td class="py-3">2025-05-15</td>
+                        <td class="py-3"><span
+                                class="px-2 py-1 bg-green-100 text-green-600 text-xs rounded-full">已入住</span>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                        <td class="py-3">赵六</td>
+                        <td class="py-3">401</td>
+                        <td class="py-3">2025-05-15</td>
+                        <td class="py-3"><span
+                                class="px-2 py-1 bg-green-100 text-green-600 text-xs rounded-full">已入住</span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="py-3">孙七</td>
+                        <td class="py-3">503</td>
+                        <td class="py-3">2025-05-14</td>
+                        <td class="py-3"><span
+                                class="px-2 py-1 bg-green-100 text-green-600 text-xs rounded-full">已入住</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 card-shadow">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="font-bold text-neutral-dark">即将入住</h3>
+                <a href="#reservations" class="text-sm text-primary hover:underline">查看全部</a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                    <tr class="text-left text-gray-500 text-sm border-b">
+                        <th class="pb-3 font-medium">客人姓名</th>
+                        <th class="pb-3 font-medium">房间号</th>
+                        <th class="pb-3 font-medium">入住日期</th>
+                        <th class="pb-3 font-medium">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                        <td class="py-3">周八</td>
+                        <td class="py-3">102</td>
+                        <td class="py-3">2025-05-18</td>
+                        <td class="py-3">
+                            <button class="text-primary hover:text-primary/80 text-sm">办理入住</button>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                        <td class="py-3">吴九</td>
+                        <td class="py-3">206</td>
+                        <td class="py-3">2025-05-18</td>
+                        <td class="py-3">
+                            <button class="text-primary hover:text-primary/80 text-sm">办理入住</button>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                        <td class="py-3">郑十</td>
+                        <td class="py-3">303</td>
+                        <td class="py-3">2025-05-19</td>
+                        <td class="py-3">
+                            <button class="text-primary hover:text-primary/80 text-sm">办理入住</button>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                        <td class="py-3">钱十一</td>
+                        <td class="py-3">402</td>
+                        <td class="py-3">2025-05-19</td>
+                        <td class="py-3">
+                            <button class="text-primary hover:text-primary/80 text-sm">办理入住</button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="py-3">孙十二</td>
+                        <td class="py-3">504</td>
+                        <td class="py-3">2025-05-20</td>
+                        <td class="py-3">
+                            <button class="text-primary hover:text-primary/80 text-sm">办理入住</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

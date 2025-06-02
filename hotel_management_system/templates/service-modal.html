@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>服务表单</title>
+</head>
+<body>
+<!-- 服务模态框 -->
+<div id="service-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center">
+    <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="service-modal-content">
+        <div class="p-6 border-b">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold text-neutral-dark" id="service-modal-title">添加服务</h3>
+                <button id="close-service-modal" class="text-gray-400 hover:text-gray-500">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <form id="service-form" class="space-y-4">
+                <!-- 隐藏字段：服务ID（用于编辑时传递数据） -->
+                <input type="hidden" id="service-id" name="id">
+
+                <!-- 服务名称 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label for="service-name" class="block text-sm font-medium text-gray-700">
+                            服务名称 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="service-name"
+                            name="name"
+                            required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                            placeholder="请输入服务名称（如：客房清洁）"
+                        >
+                    </div>
+
+                    <!-- 服务价格 -->
+                    <div class="space-y-2">
+                        <label for="service-price" class="block text-sm font-medium text-gray-700">
+                            服务价格 <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">¥</span>
+                            <input
+                                type="number"
+                                id="service-price"
+                                name="price"
+                                min="0"
+                                step="0.01"
+                                required
+                                class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                                placeholder="0.00"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 服务类型 -->
+                <div class="space-y-2">
+                    <label for="service-type" class="block text-sm font-medium text-gray-700">
+                        服务类型 <span class="text-red-500">*</span>
+                    </label>
+                    <select
+                        id="service-type"
+                        name="type_id"
+                        required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary appearance-none bg-white"
+                    >
+                        <option value="" disabled selected>请选择服务类型</option>
+                        <option value="1">基础服务</option>
+                        <option value="2">餐饮服务</option>
+                        <option value="3">娱乐休闲</option>
+                        <option value="4">商务服务</option>
+                        <option value="5">接送服务</option>
+                    </select>
+                </div>
+
+                <!-- 服务描述 -->
+                <div class="space-y-2">
+                    <label for="service-description" class="block text-sm font-medium text-gray-700">
+                        服务描述（可选）
+                    </label>
+                    <textarea
+                        id="service-description"
+                        name="description"
+                        rows="3"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                        placeholder="请输入服务详情（如：每日一次标准客房清洁）"
+                    ></textarea>
+                </div>
+            </form>
+        </div>
+
+        <div class="p-6 border-t flex justify-end gap-3">
+            <button
+                id="cancel-service-btn"
+                class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-neutral-dark hover:bg-gray-50 transition-colors"
+            >
+                取消
+            </button>
+            <button
+                id="save-service-btn"
+                class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors btn-hover"
+            >
+                保存
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

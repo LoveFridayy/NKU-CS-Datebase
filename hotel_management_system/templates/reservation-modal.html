@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>客户表单</title>
+</head>
+<body>
+<!-- 预订模态框 -->
+<div id="reservation-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center" role="dialog"
+     aria-modal="true">
+    <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0"
+         id="reservation-modal-content" aria-labelledby="reservation-modal-title"
+         aria-describedby="reservation-modal-desc">
+        <div class="p-6 border-b">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold text-neutral-800" id="reservation-modal-title">
+                    <span id="modal-title-text">新建预订</span>
+                </h3>
+                <button
+                        id="close-reservation-modal"
+                        class="text-gray-400 hover:text-gray-600 focus:outline-none"
+                        aria-label="关闭模态框"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="p-6 space-y-4" id="reservation-modal-body">
+            <form id="reservation-form" class="space-y-4">
+                <!-- 隐藏字段：预订ID（编辑时使用） -->
+                <input type="hidden" id="reservation-id" name="id">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 预订编号 -->
+                    <div class="space-y-2">
+                        <label for="reservation-number" class="block text-sm font-medium text-gray-700">
+                            预订编号 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                                type="text"
+                                id="reservation-number"
+                                name="reservation_number"
+                                required
+                                pattern="^[A-Za-z0-9_-]{6,20}$"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                                placeholder="例如：RSV-20231001-001"
+                        >
+                        <p class="text-sm text-gray-500">支持字母、数字、下划线，6-20位</p>
+                    </div>
+
+                    <!-- 客户选择 -->
+                    <div class="space-y-2 md:col-span-2">
+                        <label for="guest-id" class="block text-sm font-medium text-gray-700">
+                            客户 <span class="text-red-500">*</span>
+                        </label>
+                        <select
+                                id="guest-id-1"
+                                name="guest_id"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 appearance-none"
+                        >
+                            <option value="" disabled selected>请选择客户</option>
+                            <!-- 动态加载客户列表（需通过AJAX填充） -->
+                            <option value="1">张三 (13800138001)</option>
+                            <option value="2">李四 (13900139002)</option>
+                            <option value="3">王五 (13700137003)</option>
+                            <option value="4">赵六 (13600136004)</option>
+                            <option value="5">钱七 (13500135005)</option>
+                            <option value="6">孙八 (13400134006)</option>
+                            <option value="7">周九 (13300133007)</option>
+                            <option value="8">吴十 (13200132008)</option>
+                        </select>
+                        <div class="text-sm text-gray-500" id="guest-search-hint">
+                            支持输入姓名或手机号搜索客户
+                        </div>
+                    </div>
+
+                    <!-- 房间选择 -->
+                    <div class="space-y-2 md:col-span-2">
+                        <label for="room-id" class="block text-sm font-medium text-gray-700">
+                            房间 <span class="text-red-500">*</span>
+                        </label>
+                        <select
+                                id="room-id-1"
+                                name="room_id"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 appearance-none"
+                        >
+                            <option value="" disabled selected>请选择房间</option>
+                            <!-- 动态加载可用房间（需通过AJAX填充） -->
+                            <option value="1">101号房（单人床，可住1人）</option>
+                            <option value="2">102号房（单人床，可住1人）</option>
+                            <option value="3">103号房（双人床，可住2人）</option>
+                            <option value="4">104号房（双人床，可住2人）</option>
+                            <option value="5">105号房（大床，可住1人）</option>
+                            <option value="6">201号房（单人床，可住1人）</option>
+                            <option value="7">202号房（双人床，可住2人）</option>
+                            <option value="8">203号房（大床，可住1人）</option>
+                            <option value="9">204号房（双床，可住2人）</option>
+                            <option value="10">205号房（大床，可住2人）</option>
+                            <option value="11">301号房（大床，可住1人）</option>
+                            <option value="12">302号房（双床，可住2人）</option>
+                            <option value="13">303号房（大床，可住2人）</option>
+                            <option value="14">304号房（特大床，可住4人）</option>
+                            <option value="15">305号房（特大床，可住4人）</option>
+                        </select>
+                        <div class="text-sm text-gray-500" id="room-availability-hint">
+                            仅显示状态为"可用"的房间
+                        </div>
+                    </div>
+
+                    <!-- 入住日期 -->
+                    <div class="space-y-2">
+                        <label for="check-in" class="block text-sm font-medium text-gray-700">
+                            入住日期 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                                type="date"
+                                id="check-in"
+                                name="check_in"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                        >
+                    </div>
+
+                    <!-- 退房日期 -->
+                    <div class="space-y-2">
+                        <label for="check-out" class="block text-sm font-medium text-gray-700">
+                            退房日期 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                                type="date"
+                                id="check-out"
+                                name="check_out"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                        >
+                    </div>
+
+                    <!-- 预订状态 -->
+                    <div class="space-y-2 md:col-span-2">
+                        <label for="status" class="block text-sm font-medium text-gray-700">
+                            预订状态 <span class="text-red-500">*</span>
+                        </label>
+                        <select
+                                id="status"
+                                name="status"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 appearance-none"
+                        >
+                            <option value="1" selected>待确认</option>
+                            <option value="2">已确认</option>
+                            <option value="3">已入住</option>
+                            <option value="4">已取消</option>
+                        </select>
+                    </div>
+
+                    <!-- 总价 -->
+                    <div class="space-y-2">
+                        <label for="total-price" class="block text-sm font-medium text-gray-700">
+                            总价（元）<span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">¥</span>
+                            <input
+                                    type="number"
+                                    id="total-price"
+                                    name="total_price"
+                                    step="0.01"
+                                    min="0"
+                                    class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                                    placeholder="自动计算"
+                            >
+                        </div>
+                        <p class="text-sm text-gray-500">根据入住时长和房间价格自动计算</p>
+                    </div>
+
+                    <!-- 押金 -->
+                    <div class="space-y-2">
+                        <label for="deposit" class="block text-sm font-medium text-gray-700">
+                            押金（元）
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">¥</span>
+                            <input
+                                    type="number"
+                                    id="deposit"
+                                    name="deposit"
+                                    step="0.01"
+                                    min="0"
+                                    class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                                    placeholder="可选，默认0.00"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="p-6 border-t flex justify-end gap-4">
+            <button
+                    id="cancel-reservation-btn"
+                    class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-neutral-dark hover:bg-gray-50 transition-colors"
+            >
+                取消
+            </button>
+            <button
+                    id="save-reservation-btn"
+                    class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors btn-hover"
+            >
+                保存
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

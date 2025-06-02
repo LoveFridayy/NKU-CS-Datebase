@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>报表中心</title>
+</head>
+<body>
+<div id="page-reports" class="page-content hidden">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+        <div>
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-dark">报表中心</h2>
+            <p class="text-gray-500">查看和下载各类酒店报表</p>
+        </div>
+        <div class="mt-4 md:mt-0 flex gap-3">
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-neutral-dark hover:bg-gray-50 transition-colors">
+                <i class="fa-solid fa-download mr-2"></i>导出报表
+            </button>
+        </div>
+    </div>
+
+    <!-- 报表列表 -->
+    <div class="bg-white rounded-xl card-shadow overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="min-w-full">
+                <thead>
+                <tr class="bg-gray-50 text-left text-gray-500 text-sm">
+                    <th class="px-6 py-3 font-medium">报表名称</th>
+                    <th class="px-6 py-3 font-medium">报表类型</th>
+                    <th class="px-6 py-3 font-medium">生成日期</th>
+                    <th class="px-6 py-3 font-medium">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="border-b hover:bg-gray-50 transition-colors">
+                    <td class="px-6 py-4">每日入住报表</td>
+                    <td class="px-6 py-4">入住统计</td>
+                    <td class="px-6 py-4">2025-05-16</td>
+                    <td class="px-6 py-4">
+                        <button class="text-primary hover:text-primary/80">
+                            <i class="fa-solid fa-download"></i>下载
+                        </button>
+                    </td>
+                </tr>
+                <tr class="border-b hover:bg-gray-50 transition-colors">
+                    <td class="px-6 py-4">每月收入报表</td>
+                    <td class="px-6 py-4">财务统计</td>
+                    <td class="px-6 py-4">2025-05-01</td>
+                    <td class="px-6 py-4">
+                        <button class="text-primary hover:text-primary/80">
+                            <i class="fa-solid fa-download"></i>下载
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>客户管理</title>
+</head>
+<body>
+<div id="page-guests" class="page-content hidden">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+        <div>
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-dark">客户管理</h2>
+            <p class="text-gray-500">查看和管理所有客户信息</p>
+        </div>
+        <div class="mt-4 md:mt-0 flex gap-3">
+            <button id="add-guest-btn"
+                    class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors btn-hover">
+                <i class="fa-solid fa-plus mr-2"></i>添加客户
+            </button>
+        </div>
+    </div>
+
+    <!-- 筛选器 -->
+    <div class="bg-white rounded-xl p-4 card-shadow mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">客户姓名</label>
+                <input type="text" placeholder="搜索客户姓名" id="search-guest-name"
+                       class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">电话号码</label>
+                <input type="text" placeholder="搜索客户电话号码" id="search-guest-phone"
+                       class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">会员等级</label>
+                <select id="filter-guest-vip-level"
+                        class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                    <option value="">所有等级</option>
+                    <option value="0">白银会员</option>
+                    <option value="1">黄金会员</option>
+                    <option value="2">白金会员</option>
+                     <option value="3">钻石会员</option>
+                </select>
+            </div>
+            <div class="flex items-end">
+                <button id="filter-guest-btn"
+                        class="w-full px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
+                    <i class="fa-solid fa-search mr-2"></i>搜索
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 客户列表 -->
+    <div class="bg-white rounded-xl card-shadow overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="min-w-full">
+                <thead>
+                <tr class="bg-gray-50 text-left text-gray-500 text-sm">
+                    <th class="px-6 py-3 font-medium">客户姓名</th>
+                    <th class="px-6 py-3 font-medium">联系方式</th>
+                    <th class="px-6 py-3 font-medium">会员等级</th>
+                    <th class="px-6 py-3 font-medium">消费总额</th>
+                    <th class="px-6 py-3 font-medium">操作</th>
+                </tr>
+                </thead>
+                <tbody id="guests-table-body">
+                <!-- 表格内容将通过JavaScript动态生成 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 分页条 -->
+    <div class="pagination-container" id="guest-pagination-container">
+        <div class="page-info" id="guest-page-info"></div>
+        <div class="pagination-buttons" id="guest-pagination-buttons"></div>
+    </div>
+</div>
+<!-- 引用房间模态框模板（假设为独立文件） -->
+{% include 'guest-modal.html' %}
+</body>
+<script src="/static/js/guest.js"></script>
+</html>
